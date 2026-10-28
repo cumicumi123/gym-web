@@ -1,0 +1,511 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-10-26T05:41:41.605047+00:00",
+  "dataset": {
+    "name": "Gym Members Exercise Tracking",
+    "source": "Kaggle public dataset (valakhorasani)",
+    "rows": 973,
+    "features": 14,
+    "classes": [
+      "Beginner",
+      "Intermediate",
+      "Advanced"
+    ],
+    "label_column": "Experience_Level",
+    "synthetic": false,
+    "class_distribution": {
+      "Beginner": 376,
+      "Intermediate": 406,
+      "Advanced": 191
+    },
+    "missing_values": 0,
+    "duplicate_rows": 0
+  },
+  "label_scheme": {
+    "type": "ordinal",
+    "mapping": {
+      "1": "Beginner",
+      "2": "Intermediate",
+      "3": "Advanced"
+    },
+    "description": "Experience_Level 1/2/3 pada dataset dipetakan ke Beginner/Intermediate/Advanced."
+  },
+  "preprocessing": {
+    "numeric": "StandardScaler",
+    "categorical": "OneHotEncoder(handle_unknown='ignore')",
+    "split": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "stratified": true
+    },
+    "goal_mapping": {
+      "cutting": "Cardio",
+      "bulking": "Strength",
+      "strength": "Strength"
+    }
+  },
+  "metric_average": "macro",
+  "models": [
+    {
+      "key": "random_forest",
+      "name": "Random Forest",
+      "file": "model_random_forest.joblib",
+      "provenance": "Model Random Forest yang sudah ada di proyek pengguna (model_gym_rf.pkl + preprocessor_gym.pkl), dievaluasi ulang pada test split 20%.",
+      "accuracy": 0.9128205128205128,
+      "precision": 0.9292829775588397,
+      "recall": 0.9267208672086721,
+      "f1": 0.9273889682377746,
+      "confusion_matrix": [
+        [
+          64,
+          11,
+          0
+        ],
+        [
+          6,
+          76,
+          0
+        ],
+        [
+          0,
+          0,
+          38
+        ]
+      ],
+      "classification_report": {
+        "Beginner": {
+          "precision": 0.9142857142857143,
+          "recall": 0.8533333333333334,
+          "f1-score": 0.8827586206896552,
+          "support": 75.0
+        },
+        "Intermediate": {
+          "precision": 0.8735632183908046,
+          "recall": 0.926829268292683,
+          "f1-score": 0.8994082840236687,
+          "support": 82.0
+        },
+        "Advanced": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 38.0
+        },
+        "accuracy": 0.9128205128205128,
+        "macro avg": {
+          "precision": 0.9292829775588397,
+          "recall": 0.9267208672086721,
+          "f1-score": 0.9273889682377746,
+          "support": 195.0
+        },
+        "weighted avg": {
+          "precision": 0.9138646793819207,
+          "recall": 0.9128205128205128,
+          "f1-score": 0.9126070555982819,
+          "support": 195.0
+        }
+      },
+      "per_class": [
+        {
+          "label": "Beginner",
+          "precision": 0.9142857142857143,
+          "recall": 0.8533333333333334,
+          "f1": 0.8827586206896552,
+          "support": 75
+        },
+        {
+          "label": "Intermediate",
+          "precision": 0.8735632183908046,
+          "recall": 0.926829268292683,
+          "f1": 0.8994082840236687,
+          "support": 82
+        },
+        {
+          "label": "Advanced",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 38
+        }
+      ],
+      "best_params": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": null,
+        "criterion": "gini",
+        "max_depth": null,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 100,
+        "n_jobs": null,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "training_seconds": 0.0,
+      "is_best": true
+    },
+    {
+      "key": "logistic_regression",
+      "name": "Logistic Regression",
+      "file": "model_logistic_regression.joblib",
+      "provenance": "Dilatih ulang oleh train.py memakai GridSearchCV + stratified 5-fold.",
+      "accuracy": 0.8717948717948718,
+      "precision": 0.8942099567099566,
+      "recall": 0.894579945799458,
+      "f1": 0.8938256576722797,
+      "confusion_matrix": [
+        [
+          65,
+          10,
+          0
+        ],
+        [
+          15,
+          67,
+          0
+        ],
+        [
+          0,
+          0,
+          38
+        ]
+      ],
+      "classification_report": {
+        "Beginner": {
+          "precision": 0.8125,
+          "recall": 0.8666666666666667,
+          "f1-score": 0.8387096774193549,
+          "support": 75.0
+        },
+        "Intermediate": {
+          "precision": 0.8701298701298701,
+          "recall": 0.8170731707317073,
+          "f1-score": 0.8427672955974843,
+          "support": 82.0
+        },
+        "Advanced": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 38.0
+        },
+        "accuracy": 0.8717948717948718,
+        "macro avg": {
+          "precision": 0.8942099567099566,
+          "recall": 0.894579945799458,
+          "f1-score": 0.8938256576722797,
+          "support": 195.0
+        },
+        "weighted avg": {
+          "precision": 0.8732725607725608,
+          "recall": 0.8717948717948718,
+          "f1-score": 0.8718468925407452,
+          "support": 195.0
+        }
+      },
+      "per_class": [
+        {
+          "label": "Beginner",
+          "precision": 0.8125,
+          "recall": 0.8666666666666667,
+          "f1": 0.8387096774193549,
+          "support": 75
+        },
+        {
+          "label": "Intermediate",
+          "precision": 0.8701298701298701,
+          "recall": 0.8170731707317073,
+          "f1": 0.8427672955974843,
+          "support": 82
+        },
+        {
+          "label": "Advanced",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 38
+        }
+      ],
+      "best_params": {
+        "classifier__C": 10.0,
+        "classifier__class_weight": "balanced"
+      },
+      "training_seconds": 3.95,
+      "is_best": false
+    },
+    {
+      "key": "svm",
+      "name": "Support Vector Machine",
+      "file": "model_svm.joblib",
+      "provenance": "Dilatih ulang oleh train.py memakai GridSearchCV + stratified 5-fold.",
+      "accuracy": 0.8769230769230769,
+      "precision": 0.8981843879104153,
+      "recall": 0.8975067750677507,
+      "f1": 0.8977531748616085,
+      "confusion_matrix": [
+        [
+          62,
+          13,
+          0
+        ],
+        [
+          11,
+          71,
+          0
+        ],
+        [
+          0,
+          0,
+          38
+        ]
+      ],
+      "classification_report": {
+        "Beginner": {
+          "precision": 0.8493150684931506,
+          "recall": 0.8266666666666667,
+          "f1-score": 0.8378378378378378,
+          "support": 75.0
+        },
+        "Intermediate": {
+          "precision": 0.8452380952380952,
+          "recall": 0.8658536585365854,
+          "f1-score": 0.8554216867469879,
+          "support": 82.0
+        },
+        "Advanced": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 38.0
+        },
+        "accuracy": 0.8769230769230769,
+        "macro avg": {
+          "precision": 0.8981843879104153,
+          "recall": 0.8975067750677507,
+          "f1-score": 0.8977531748616085,
+          "support": 195.0
+        },
+        "weighted avg": {
+          "precision": 0.8769648920333851,
+          "recall": 0.8769230769230769,
+          "f1-score": 0.8768329033389274,
+          "support": 195.0
+        }
+      },
+      "per_class": [
+        {
+          "label": "Beginner",
+          "precision": 0.8493150684931506,
+          "recall": 0.8266666666666667,
+          "f1": 0.8378378378378378,
+          "support": 75
+        },
+        {
+          "label": "Intermediate",
+          "precision": 0.8452380952380952,
+          "recall": 0.8658536585365854,
+          "f1": 0.8554216867469879,
+          "support": 82
+        },
+        {
+          "label": "Advanced",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 38
+        }
+      ],
+      "best_params": {
+        "classifier__C": 10,
+        "classifier__class_weight": null,
+        "classifier__gamma": "scale",
+        "classifier__kernel": "linear"
+      },
+      "training_seconds": 1.0,
+      "is_best": false
+    }
+  ],
+  "best_model": {
+    "key": "random_forest",
+    "name": "Random Forest",
+    "file": "best_model.joblib",
+    "metric": "f1_macro",
+    "value": 0.9273889682377746
+  },
+  "analysis": {
+    "frequently_confused": [
+      {
+        "from": "Beginner",
+        "to": "Intermediate",
+        "count": 11
+      },
+      {
+        "from": "Intermediate",
+        "to": "Beginner",
+        "count": 6
+      }
+    ],
+    "top_features": [
+      {
+        "feature": "Durasi sesi",
+        "importance": 0.233
+      },
+      {
+        "feature": "Frekuensi latihan",
+        "importance": 0.2327
+      },
+      {
+        "feature": "Persentase lemak",
+        "importance": 0.1765
+      },
+      {
+        "feature": "Kalori terbakar",
+        "importance": 0.1119
+      },
+      {
+        "feature": "Asupan air",
+        "importance": 0.0439
+      },
+      {
+        "feature": "Berat",
+        "importance": 0.0346
+      },
+      {
+        "feature": "BMI",
+        "importance": 0.0286
+      },
+      {
+        "feature": "Avg BPM",
+        "importance": 0.0279
+      }
+    ],
+    "notes": [
+      "F1 macro dipakai sebagai dasar pemilihan model karena kelas Advanced lebih sedikit (191 dari 973 baris).",
+      "Random Forest berasal dari artifact pengguna sehingga metriknya dapat sedikit optimistis: proses split asli tidak terdokumentasi.",
+      "Model memprediksi level/intensitas, bukan diagnosis medis atau jaminan hasil latihan.",
+      "Fitur seperti BPM, kalori, dan durasi sesi diisi otomatis bila pengguna tidak mengisinya; nilai tersebut adalah estimasi, bukan pengukuran.",
+      "Dataset publik ini terbatas pada 973 baris dan tidak mewakili semua populasi, usia ekstrem, atau kondisi kesehatan khusus."
+    ]
+  },
+  "eda": {
+    "rows": 973,
+    "features": 14,
+    "missing_values": 0,
+    "duplicate_rows": 0,
+    "class_distribution": {
+      "Beginner": 376,
+      "Intermediate": 406,
+      "Advanced": 191
+    },
+    "numeric_summary": {
+      "Age": {
+        "mean": 38.683,
+        "std": 12.181,
+        "min": 18.0,
+        "max": 59.0
+      },
+      "Weight (kg)": {
+        "mean": 73.855,
+        "std": 21.208,
+        "min": 40.0,
+        "max": 129.9
+      },
+      "Height (m)": {
+        "mean": 1.723,
+        "std": 0.128,
+        "min": 1.5,
+        "max": 2.0
+      },
+      "Max_BPM": {
+        "mean": 179.884,
+        "std": 11.526,
+        "min": 160.0,
+        "max": 199.0
+      },
+      "Avg_BPM": {
+        "mean": 143.767,
+        "std": 14.345,
+        "min": 120.0,
+        "max": 169.0
+      },
+      "Resting_BPM": {
+        "mean": 62.223,
+        "std": 7.327,
+        "min": 50.0,
+        "max": 74.0
+      },
+      "Session_Duration (hours)": {
+        "mean": 1.256,
+        "std": 0.343,
+        "min": 0.5,
+        "max": 2.0
+      },
+      "Calories_Burned": {
+        "mean": 905.422,
+        "std": 272.642,
+        "min": 303.0,
+        "max": 1783.0
+      },
+      "Fat_Percentage": {
+        "mean": 24.977,
+        "std": 6.259,
+        "min": 10.0,
+        "max": 35.0
+      },
+      "Water_Intake (liters)": {
+        "mean": 2.627,
+        "std": 0.6,
+        "min": 1.5,
+        "max": 3.7
+      },
+      "Workout_Frequency (days/week)": {
+        "mean": 3.322,
+        "std": 0.913,
+        "min": 2.0,
+        "max": 5.0
+      },
+      "BMI": {
+        "mean": 24.912,
+        "std": 6.661,
+        "min": 12.32,
+        "max": 49.84
+      }
+    },
+    "outliers_iqr": {
+      "Age": 0,
+      "Weight (kg)": 9,
+      "Height (m)": 0,
+      "Max_BPM": 0,
+      "Avg_BPM": 0,
+      "Resting_BPM": 0,
+      "Session_Duration (hours)": 0,
+      "Calories_Burned": 10,
+      "Fat_Percentage": 0,
+      "Water_Intake (liters)": 0,
+      "Workout_Frequency (days/week)": 0,
+      "BMI": 25
+    },
+    "correlations_with_target": {
+      "Workout_Frequency (days/week)": 0.8371,
+      "Session_Duration (hours)": 0.7648,
+      "Calories_Burned": 0.6941,
+      "Fat_Percentage": -0.6544,
+      "Water_Intake (liters)": 0.3041,
+      "Age": -0.0187,
+      "BMI": 0.016,
+      "Height (m)": -0.0103,
+      "Weight (kg)": 0.0034,
+      "Resting_BPM": 0.0018,
+      "Avg_BPM": -0.0009,
+      "Max_BPM": 0.0005
+    }
+  }
+}
